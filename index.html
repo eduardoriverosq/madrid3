@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Longevity Summit Madrid 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#020c1b', 800: '#0a192f', 700: '#112240' },
+                        teal: { 400: '#64ffda', },
+                        gold: { 500: '#c5a059', 600: '#b08d48' },
+                        bronze: { 500: '#cd7f32' },
+                        silver: { 500: '#c0c0c0' },
+                        platinum: { 500: '#e5e4e2' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        header: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'pop-up': 'popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        popUp: {
+                            '0%': { opacity: '0', transform: 'scale(0.8)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* INDICADOR DE SCROLL */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c5a059, #64ffda);
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.5);
+        }
+
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        h1 { font-family: 'Playfair Display', serif; font-weight: 900; letter-spacing: 0.05em; }
+        h2, h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.02em; }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #c5a059 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* PORTADA: Enlace Online para asegurar visualización inmediata */
+        /* Al cambiar a la carpeta le cambiamos el nombre: 'assets/img/palacio.jpg' */
+        .hero-bg {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/bf/Communications_Palace_Tower.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+        }
+        
+        /* CARRUSEL INFINITO */
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scroll-reverse { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        
+        .animate-scroll { display: flex; width: max-content; animation: scroll 40s linear infinite; }
+        .animate-scroll-reverse { display: flex; width: max-content; animation: scroll-reverse 45s linear infinite; }
+        .animate-scroll-fast { display: flex; width: max-content; animation: scroll 30s linear infinite; }
+        .animate-scroll:hover, .animate-scroll-reverse:hover, .animate-scroll-fast:hover { animation-play-state: paused; }
+
+        .speaker-card { transition: all 0.3s ease; }
+        .speaker-img { filter: grayscale(100%); transition: all 0.5s ease; border: 2px solid transparent; }
+        .speaker-card:hover .speaker-img { filter: grayscale(0%); border-color: #64ffda; transform: scale(2.05); }
+
+        .tour-card { transition: all 0.5s ease; }
+        .tour-card:hover { transform: translateY(-10px); }
+        .tour-content { transform: translateY(0); transition: all 0.5s ease; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .gallery-slide { transition: transform 0.3s ease; }
+        .gallery-slide:hover { transform: scale(1.02); }
+
+        .sponsor-list li { margin-bottom: 0.5rem; font-size: 0.8rem; display: flex; align-items: start; gap: 8px; }
+        .sponsor-list li i { margin-top: 4px; color: #64ffda; }
+
+        #register-modal { backdrop-filter: blur(8px); }
+
+        /* EFECTOS PREMIUM - SOMBRAS Y LUZ */
+        .premium-shadow {
+            box-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.05),
+                0 8px 16px rgba(0, 0, 0, 0.08),
+                0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .gold-glow {
+            box-shadow: 
+                0 0 20px rgba(197, 160, 89, 0.3),
+                0 0 40px rgba(197, 160, 89, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .rim-light {
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(100, 255, 218, 0.2);
+        }
+
+        .card-premium {
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.15),
+                0 0 1px rgba(197, 160, 89, 0.5);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card-premium:hover {
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.2),
+                0 0 1px rgba(197, 160, 89, 0.8);
+            transform: translateY(-8px);
+        }
+
+        /* ESPACIADO PREMIUM Y BREATHING ROOM */
+        section {
+            padding: 6rem 2rem !important;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #c5a059, transparent);
+            margin: 0 auto 2rem;
+        }
+
+        .section-title-premium {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title-premium::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #c5a059, #64ffda);
+            border-radius: 2px;
+        }
+
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 2.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: 2px solid #c5a059;
+            background: transparent;
+            color: #c5a059;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-weight: 700;
+        }
+
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-premium:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-premium:hover {
+            background: #c5a059;
+            color: #020c1b;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.3);
+        }
+
+        button[class*="bg-gold"], a[class*="bg-gold"] {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        }
+
+        button[class*="bg-gold"]:hover, a[class*="bg-gold"]:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.3) !important;
+        }
+
+        /* ANIMACIONES ADICIONALES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* EFECTO 3D EN TARJETAS */
+        .card-3d {
+            perspective: 1000px;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card-3d:hover {
+            transform: rotateX(5deg) rotateY(-5deg) translateZ(20px);
+        }
+
+        /* GLASS MORPHISM */
+        .glass-effect {
+            background: rgba(10, 25, 47, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-navy-900 text-slate-300 antialiased">
+    <div class="scroll-indicator"></div>
+
+    <div id="register-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-navy-900/80 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-navy-800 border-2 border-gold-500 p-8 rounded-lg shadow-2xl max-w-md w-full relative mx-4 animate-pop-up">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fas fa-times text-xl"></i></button>
+            <div class="text-center">
+                <p class="text-teal-400 uppercase tracking-widest text-xs font-bold mb-2">Limited Availability</p>
+                <h3 class="text-2xl font-header font-bold text-white mb-4">Secure Your Spot for 2026</h3>
+                <div class="flex flex-col gap-3">
+                    <a href="#tickets" onclick="closeModal()" class="bg-gold-500 text-navy-900 font-bold py-3 px-6 rounded hover:bg-white transition uppercase tracking-widest text-sm shadow-lg">Get Tickets Now</a>
+                    <button onclick="closeModal()" class="text-slate-500 text-xs hover:text-slate-300 underline mt-2">Maybe later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-50 bg-navy-900/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-header font-bold text-white tracking-widest">
+                <span class="text-gold-500"></span>
+            </div>
+            <div class="hidden lg:flex space-x-5 text-[10px] xl:text-xs uppercase tracking-widest font-medium items-center">
+                <a href="#about" class="hover:text-gold-500 transition">About</a>
+                <a href="#speakers" class="hover:text-gold-500 transition">Speakers</a>
+                <a href="#agenda" class="hover:text-gold-500 transition">Agenda</a>
+                <a href="#tours" class="hover:text-gold-500 transition text-gold-500">Tours</a>
+                <a href="#startups" class="hover:text-teal-400 transition text-teal-400">Startups</a>
+                <a href="#tickets" class="hover:text-gold-500 transition">Tickets</a>
+                <a href="#sponsorship" class="hover:text-gold-500 transition">Sponsors</a>
+                <a href="#press" class="hover:text-white transition">Press</a>
+                <a href="#tickets" class="text-white border border-white px-4 py-2 hover:bg-white hover:text-navy-900 transition font-bold">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center text-center px-4" style="background: url('https://upload.wikimedia.org/wikipedia/commons/c/cd/Madrid_Palacio_de_Cibeles_%2854359974024%29.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="absolute inset-0 bg-navy-900/50"></div>
+        <div class="relative z-10 max-w-5xl animate-fade-in">
+            <p class="text-teal-400 uppercase tracking-[0.3em] mb-4 text-sm font-semibold shadow-black drop-shadow-md">The Future of Human Health</p>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">International <br><span class="text-gradient drop-shadow-md">Longevity Summit</span> <br>Madrid 2026</h1>
+            <div class="flex justify-center gap-6 mb-12 text-white font-header drop-shadow-md">
+                <div class="text-center"><span class="block text-3xl font-bold">365</span><span class="text-xs uppercase text-slate-200">Days</span></div>
+            </div>
+            <a href="#tickets" class="bg-gold-500 text-navy-900 px-8 py-4 font-bold tracking-wider hover:bg-white transition uppercase shadow-lg">Reserve Seat</a>
+        </div>
+    </header>
+
+    <section id="about" class="py-24 bg-navy-900 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl font-header font-bold text-white mb-6">Redefining the <span class="text-gold-500">Biological Horizon</span></h2>
+                <p class="text-slate-400 mb-6 leading-relaxed">
+                    Madrid 2026 isn't just a conference; it's a global convergence of scientific rigor and visionary thinking. We bring the longevity conversation to Southern Europe.The International Longevity Summit will be held at the Ilustre Colegio Oficial de Médicos de Madrid.
+
+ICOMEM, the official name of the institution that brings together all legally practicing doctors in Madrid, was founded in 1893. Its Great Amphiteater is the most beautiful Classical auditorium in Spain, the same place where the Santiago Ramón y Cajal, Spanish Nobel laureate, gave its lectures. The headquarters of the Colegio is located on Calle de Santa Isabel, occupying the facilities of the former Hospital Clínico de San Carlos, next to the famous Queen Sophia Museum, that hosts the Gernika painting by Picasso.Museum, that hosts the Gernika painting by Picasso.
+                </p>
+                <ul class="space-y-4 text-slate-300">
+                    <li class="flex items-center gap-3"><i class="fas fa-dna text-teal-400"></i> Advanced Genomics</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-brain text-teal-400"></i> Cognitive Preservation</li>
+                </ul>
+            </div>
+            <div class="relative">
+                <div class="absolute -inset-4 bg-teal-400/20 rounded-lg blur-lg"></div>
+                <img src="reunion.jpg" class="relative rounded-lg shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition duration-700">
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-navy-800 border-b border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-header font-bold text-white">Previous <span class="text-teal-400">Summits</span></h2>
+                <p class="text-slate-400 mt-2">Highlights from Dublin, London, and Singapore.</p>
+            </div>
+            <div class="relative group">
+                <button onclick="slideGallery(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-navy-900/80 hover:bg-gold-500 text-gold-500 hover:text-navy-900 w-12 h-12 flex items-center justify-center rounded-full border border-gold-500 transition-all duration-300 -ml-4 md:-ml-8 shadow-lg cursor-pointer">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div id="gallery-scroll-container" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth py-4">
+                    <div class="min-w-[300px] md:min-w-[400px] h-64 relative rounded-lg overflow-hidden gallery-slide border border-white/10">
+                        <img src="https://www.transvisionmadrid.com/es/img/videos/logo%202024.jpg" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-navy-900 to-transparent">
+                            <span class="text-white font-bold block">Main Stage</span>
+                            <span class="text-gold-500 text-xs uppercase">London 2024</span>
+                        </div>
+                    </div>
+                    <div class="min-w-[300px] md:min-w-[400px] h-64 relative rounded-lg overflow-hidden gallery-slide border border-white/10">
+                        <img src="https://www.transvisionmadrid.com/es/img/videos/transvision2023up.png" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-navy-900 to-transparent">
+                            <span class="text-white font-bold block">Networking Hall</span>
+                            <span class="text-gold-500 text-xs uppercase">Dublin 2023</span>
+                        </div>
+                    </div>
+                    <div class="min-w-[300px] md:min-w-[400px] h-64 relative rounded-lg overflow-hidden gallery-slide border border-white/10">
+                        <img src="https://www.transvisionmadrid.com/es/img/videos/transvision2022min---dw.png" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-navy-900 to-transparent">
+                            <span class="text-white font-bold block">Tech Panel</span>
+                            <span class="text-gold-500 text-xs uppercase">Singapore 2022</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="slideGallery(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-navy-900/80 hover:bg-gold-500 text-gold-500 hover:text-navy-900 w-12 h-12 flex items-center justify-center rounded-full border border-gold-500 transition-all duration-300 -mr-4 md:-mr-8 shadow-lg cursor-pointer">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="speakers" class="py-24 bg-navy-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-header font-bold text-white">World-Class <span class="text-teal-400">Speakers</span></h2>
+                <div class="mt-8 animate-pulse-slow">
+                    <span class="inline-block border-b border-gold-500 pb-2 text-xl md:text-2xl font-header font-medium text-gold-500 tracking-[0.3em] uppercase shadow-lg">
+                        Speakers 2026 Soon
+                    </span>
+                </div>
+            </div>
+            <div id="speakers-grid" class="grid md:grid-cols-4 gap-8 text-center mb-12">
+                <div class="speaker-card group relative">
+                    <img src="1.jpg" class="speaker-img w-32 h-32 rounded-full mx-auto object-cover mb-4 bg-navy-800">
+                    <h3 class="text-sm text-white font-bold">George Church, PhD</h3>
+                    <a href="#" class="text-teal-400 hover:text-white transition mt-2 inline-block"><i class="fab fa-linkedin text-lg"></i></a>
+                </div>
+                <div class="speaker-card group relative">
+                    <img src="2.jpg" class="speaker-img w-32 h-32 rounded-full mx-auto object-cover mb-4 bg-navy-800">
+                    <h3 class="text-sm text-white font-bold">Dr. Peter Attia</h3>
+                    <a href="#" class="text-teal-400 hover:text-white transition mt-2 inline-block"><i class="fab fa-linkedin text-lg"></i></a>
+                </div>
+                <div class="speaker-card group relative">
+                    <img src="3.jpg" class="speaker-img w-32 h-32 rounded-full mx-auto object-cover mb-4 bg-navy-800">
+                    <h3 class="text-sm text-white font-bold">Maria Blasco, PhD</h3>
+                    <a href="#" class="text-teal-400 hover:text-white transition mt-2 inline-block"><i class="fab fa-linkedin text-lg"></i></a>
+                </div>
+                <div class="speaker-card group relative">
+                    <img src="4.jpg" class="speaker-img w-32 h-32 rounded-full mx-auto object-cover mb-4 bg-navy-800">
+                    <h3 class="text-sm text-white font-bold">Aubrey de Grey</h3>
+                    <a href="#" class="text-teal-400 hover:text-white transition mt-2 inline-block"><i class="fab fa-linkedin text-lg"></i></a>
+                </div>
+            </div>
+            <div class="flex justify-center" id="load-more-container">
+                <button onclick="loadAllSpeakers()" class="group relative px-8 py-4 bg-transparent overflow-hidden border-2 border-gold-500 text-gold-500 font-bold uppercase tracking-widest hover:bg-gold-500 hover:text-navy-900 transition-all duration-300 shadow-[0_0_20px_rgba(197,160,89,0.2)] hover:shadow-[0_0_40px_rgba(197,160,89,0.6)] cursor-pointer">
+                    <span class="relative z-10 flex items-center gap-3">View Full Speaker Lineup (40+)<i class="fas fa-plus group-hover:rotate-90 transition-transform"></i></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="committee" class="py-24 bg-navy-800 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-24">
+                <h2 class="text-3xl font-header font-bold text-white mb-10 text-center">Scientific <span class="text-teal-400">Committee, Conference Chair: José Luis Cordeiro, MBA, PhD</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">George Church</h4><p class="text-teal-400 text-[10px] uppercase tracking-widest mt-1">PhD, Harvard University</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Aubrey de Grey</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, University of Cambridge</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Francisco Mera Cordero</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">MD, Universidad San Ignacio de Loyola Lima</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">José Serrés</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, Universidad de Sevilla</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Juan Carlos Méndez</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">MD, Universidad de los Andes</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Rodolfo Goya</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, Universidad Nacional de La Plata</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">João Pedro de Magalhães</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, University of Liverpool</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Felipe Debasa</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, Universidad Rey Juan Carlos</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Natasha Vita-More</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, University of Plymouth</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Ben Goertzel</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, Temple University</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Ramón Risco</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">PhD, Universidad de Sevilla</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-teal-400/50 transition duration-300"><h4 class="text-white font-bold text-sm">Anders Sandberg</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1"> PhD, University of Oxford</p></div>
+                                    </div>
+            </div>
+            <div>
+                <h2 class="text-3xl font-header font-bold text-white mb-10 text-center">Organizing <span class="text-gold-500">Committee</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Maristela Bermúdez</h4><p class="text-gold-500 text-[10px] uppercase tracking-widest mt-1">Directora, International Longevity Summit</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">José Antonio Tirado</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">Comunicaciones</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Sergio Tarrero</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">BSc, Alianza Futurista, Videos</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Raúl Ortiz</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">DMDima Comunicación</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Pere Fortea</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">Backend and frontpage Programmer Designer, Página web</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Justo Maurín</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">Campus Corner, Logística</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Gabriel Vásquez</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1"> MSc, Founder of ConsciencesAI, Speakers</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Miguel Ferrero</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">Neuropsicólogo, NoName Sports, Sponsors</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Álvaro Luis Valdivia</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">MSc, Content & Tech Support</p></div>
+                    <div class="bg-navy-900 p-4 border border-white/5 hover:border-gold-500/50 transition duration-300"><h4 class="text-white font-bold text-sm">Eduardo Riveros</h4><p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">MSc, arquitecto de comunicaciones y programador frontend</p></div>
+                                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="agenda" class="py-24 bg-navy-900 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-header font-bold text-white mb-12 text-center">Summit <span class="text-gold-500">Timeline</span></h2>
+            <div class="border-l-2 border-white/10 ml-4 space-y-12">
+                <div class="relative pl-8">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-teal-400 shadow-[0_0_15px_rgba(100,255,218,0.5)]"></div>
+                    <span class="text-teal-400 font-mono text-sm uppercase tracking-wide">28-29 September</span>
+                    <h3 class="text-xl text-white font-bold mt-1">Tours & Cultural Visits</h3>
+                    <p class="text-slate-500 text-sm mt-1">Exclusive access to Madrid's scientific and royal landmarks.</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-navy-800 border-2 border-gold-500"></div>
+                    <span class="text-gold-500 font-mono text-sm uppercase tracking-wide">30 september - 1 October</span>
+                    <h3 class="text-xl text-white font-bold mt-1">Main Conference</h3>
+                    <p class="text-slate-400 mt-2 text-sm italic border-l border-gold-500/30 pl-3">Featuring: Investment Panel & Startup Showcase</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tours" class="py-24 bg-navy-800 border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-3xl font-header font-bold text-white">Exclusive <span class="text-gold-500">Experiences</span></h2>
+                    <p class="text-slate-400 mt-4 max-w-xl">Join us on October 28-29 for curated visits to the intersection of history and futuristic science in Madrid.</p>
+                </div>
+                <a href="#tickets" class="hidden md:block text-gold-500 border-b border-gold-500 pb-1 hover:text-white hover:border-white transition mt-4 md:mt-0">Book Experience Access <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="tour-card relative group rounded-lg overflow-hidden h-[400px] border border-white/5 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full tour-content">
+                        <span class="bg-gold-500 text-navy-900 text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded mb-3 inline-block">Cultural</span>
+                        <h3 class="text-2xl font-bold text-white mb-2">UNESCO world heritage</h3>
+                        <p class="text-slate-300 text-sm line-clamp-3 mb-4 group-hover:line-clamp-none transition-all">Visits to UNESCO world heritage near Madrid: Avila, Segovia, El Escorial, Toledo, Alcalá de Henares, Aranjuez.</p>
+                        <span class="text-teal-400 text-sm font-semibold group-hover:underline"></span>
+                    </div>
+                </div>
+                <div class="tour-card relative group rounded-lg overflow-hidden h-[400px] border border-white/5 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full tour-content">
+                        <span class="bg-teal-400 text-navy-900 text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded mb-3 inline-block">Scientific</span>
+                        <h3 class="text-2xl font-bold text-white mb-2">CNIO Lab Visit</h3>
+                        <p class="text-slate-300 text-sm line-clamp-3 mb-4 group-hover:line-clamp-none transition-all">Guided walkthrough of the Spanish National Cancer Research Centre.</p>
+                        <span class="text-teal-400 text-sm font-semibold group-hover:underline"></span>
+                    </div>
+                </div>
+                <div class="tour-card relative group rounded-lg overflow-hidden h-[400px] border border-white/5 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full tour-content">
+                        <span class="bg-white text-navy-900 text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded mb-3 inline-block">Networking</span>
+                        <h3 class="text-2xl font-bold text-white mb-2">Gala Dinner & Winery</h3>
+                        <p class="text-slate-300 text-sm line-clamp-3 mb-4 group-hover:line-clamp-none transition-all">A journey to a historic winery outside Madrid.</p>
+                        <span class="text-teal-400 text-sm font-semibold group-hover:underline"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="startups" class="relative py-32 bg-navy-900 border-t border-b border-white/5 overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30"></div>
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-400/10 rounded-full blur-[150px] pointer-events-none"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <span class="inline-block py-1 px-3 border border-teal-400 text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-6 rounded-full">Startup Program 2026</span>
+            <h2 class="text-5xl md:text-7xl font-header font-bold text-white mb-6 leading-tight">The Global <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-white">Startup Call</span></h2>
+            <p class="text-slate-300 text-xl md:text-2xl max-w-2xl mx-auto mb-12 font-light">Are you redefining human longevity?</p>
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="#press" class="group relative px-10 py-5 bg-white text-navy-900 font-bold text-lg uppercase tracking-widest hover:bg-teal-400 transition-all duration-300"></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tickets" class="py-24 bg-navy-800 border-t border-gold-500/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-header font-bold text-white mb-2"><span class="text-gold-500">1.</span> Program: <span class="text-gold-500">Tickets</span></h2>
+                <p class="text-lg text-white font-bold">International Longevity Summit: Sep 30 & Oct 1, 2026</p>
+                <p class="text-md text-teal-400">UNESCO World Heritage Tours: Sep 28-29, 2026</p>
+            </div>
+            <div class="overflow-x-auto shadow-2xl rounded-lg border border-white/10">
+                <table class="w-full text-left border-collapse min-w-[800px]">
+                    <thead class="bg-navy-900 text-white text-center font-header text-sm uppercase">
+                        <tr>
+                            <th class="p-4 text-left pl-6">Tickets</th>
+                            <th class="p-4 bg-gold-500/20 text-gold-500">Early Bird <br><span class="text-[10px] opacity-70">(until April 1)</span></th>
+                            <th class="p-4">Standard <br><span class="text-[10px] opacity-70">(until Sep 28)</span></th>
+                            <th class="p-4">Full Rate <br><span class="text-[10px] opacity-70">(from Sep 28)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300 text-sm font-medium bg-navy-800">
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-4 pl-6 text-white font-bold">Conferences (2 Days)</td><td class="p-4 text-center text-gold-500 font-bold">199 €</td><td class="p-4 text-center">249 €</td><td class="p-4 text-center">299 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-4 pl-6">Tour: Ávila, Segovia (Sep 28)</td><td class="p-4 text-center text-gold-500 font-bold">99 €</td><td class="p-4 text-center">129 €</td><td class="p-4 text-center">149 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-4 pl-6">Tour: Alcalá, Toledo (Sep 29)</td><td class="p-4 text-center text-gold-500 font-bold">99 €</td><td class="p-4 text-center">129 €</td><td class="p-4 text-center">149 €</td></tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5"><td class="p-4 pl-6">Virtual Conferences</td><td class="p-4 text-center text-gold-500 font-bold">19 €</td><td class="p-4 text-center">29 €</td><td class="p-4 text-center">39 €</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-6"><button class="bg-gold-500 text-navy-900 font-bold px-8 py-3 rounded hover:bg-white transition uppercase text-sm">Pay with PayPal</button></div>
+        </div>
+    </section>
+
+    <section id="reunions" class="py-24 bg-navy-900 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-header font-bold text-white mb-2"><span class="text-red-500">4.</span> Sponsors: <span class="text-red-500">Private Reunions</span></h2>
+            <p class="text-xl text-white font-medium mb-12">Unique sponsor opportunity for reunions with directors & clients</p>
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-navy-800 p-6 rounded-xl border border-white/10 hover:border-teal-400 transition">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 border-2 border-teal-400 p-1"><img src="3.jpg" class="w-full h-full object-cover rounded-full"></div>
+                    <h3 class="text-lg font-bold text-white">Aubrey de Grey, PhD</h3>
+                </div>
+                <div class="bg-navy-800 p-6 rounded-xl border border-white/10 hover:border-teal-400 transition">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 border-2 border-teal-400 p-1"><img src="5.jpg" class="w-full h-full object-cover rounded-full"></div>
+                    <h3 class="text-lg font-bold text-white">Tina Wood, MBA</h3>
+                </div>
+                <div class="bg-navy-800 p-6 rounded-xl border border-white/10 hover:border-teal-400 transition">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 border-2 border-teal-400 p-1"><img src="6.jpg" class="w-full h-full object-cover rounded-full"></div>
+                    <h3 class="text-lg font-bold text-white">Joao Pedro de Magalhaes</h3>
+                </div>
+            </div>
+            <div class="bg-white/5 inline-block px-8 py-4 rounded-lg border border-white/20"><p class="text-2xl font-bold text-white">Ask for cost: <span class="text-gold-500">between 2.000€ and 5.000€</span></p></div>
+        </div>
+    </section>
+
+    <section id="sponsorship" class="py-24 bg-white text-navy-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-header font-bold text-navy-900 mb-2"><span class="text-red-600">4.</span> Sponsors: <span class="text-red-600">2026</span></h2>
+                <p class="text-xl text-slate-600 mb-12">Particular considerations can be arranged</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="border-2 border-bronze-500 rounded-lg p-4 hover:shadow-2xl transition bg-slate-50">
+                    <div class="text-center border-b-2 border-bronze-500 pb-4 mb-4">
+                        <h3 class="text-2xl font-bold text-bronze-500">Bronze (Table)</h3>
+                        <p class="text-3xl font-extrabold mt-2">5,000€</p>
+                    </div>
+                    <ul class="sponsor-list text-left text-navy-900 font-medium">
+                        <li><i class="fas fa-check text-bronze-500"></i> Table / Stand / Booth</li>
+                        <li><i class="fas fa-check text-bronze-500"></i> Raffle Materials: 1</li>
+                        <li><i class="fas fa-check text-bronze-500"></i> Logo in Photocall: Bronze Size</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-gray-400 rounded-lg p-4 hover:shadow-2xl transition bg-slate-50">
+                    <div class="text-center border-b-2 border-gray-400 pb-4 mb-4">
+                        <h3 class="text-2xl font-bold text-gray-500">Silver (Speaker)</h3>
+                        <p class="text-3xl font-extrabold mt-2">10,000€</p>
+                    </div>
+                    <ul class="sponsor-list text-left text-navy-900 font-medium">
+                        <li><i class="fas fa-check text-gray-500"></i> Table / Stand / Booth</li>
+                        <li><i class="fas fa-check text-gray-500"></i> Private Cocktail: 2</li>
+                        <li><i class="fas fa-star text-gray-500"></i> Speaker (if requested): 1</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-gold-500 rounded-lg p-4 hover:shadow-2xl transition bg-yellow-50/50 transform scale-105 shadow-xl z-10">
+                    <div class="text-center border-b-2 border-gold-500 pb-4 mb-4">
+                        <h3 class="text-2xl font-bold text-gold-600">Gold (Moderator)</h3>
+                        <p class="text-3xl font-extrabold mt-2">15,000€</p>
+                    </div>
+                    <ul class="sponsor-list text-left text-navy-900 font-medium">
+                        <li><i class="fas fa-check text-gold-500"></i> Table / Stand / Booth</li>
+                        <li><i class="fas fa-check text-gold-500"></i> Private Cocktail: 3</li>
+                        <li><i class="fas fa-star text-gold-500"></i> Speaker & Moderator: 2</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-teal-500 rounded-lg p-4 hover:shadow-2xl transition bg-slate-50">
+                    <div class="text-center border-b-2 border-teal-500 pb-4 mb-4">
+                        <h3 class="text-2xl font-bold text-teal-600">Platinum (Award)</h3>
+                        <p class="text-3xl font-extrabold mt-2">20,000€</p>
+                    </div>
+                    <ul class="sponsor-list text-left text-navy-900 font-medium">
+                        <li><i class="fas fa-check text-teal-500"></i> Table / Stand / Booth</li>
+                        <li><i class="fas fa-star text-teal-500"></i> Award Presentation: 1</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sponsors-logos" class="py-12 bg-white border-t border-gray-100 overflow-hidden">
+        <div class="relative w-full">
+            <div class="flex animate-scroll gap-20 items-center w-max mb-12">
+                <h4 class="text-4xl font-extrabold text-navy-900 opacity-80">OMNISCOPE<span class="text-teal-500">PLATINUM</span></h4>
+               
+            </div>
+
+            <div class="flex animate-scroll-reverse gap-16 items-center w-max mb-12">
+                <h4 class="text-3xl font-bold text-gray-400">REGENERATICS</h4>
+                <h4 class="text-3xl font-bold text-gray-400">JUVENTAS<span class="font-light"></span></h4>
+                <h4 class="text-3xl font-bold text-gray-400">VIVA SPARKLE</h4>
+                <h4 class="text-3xl font-bold text-gray-400">RESPIRA LIBRE</h4>
+                <h4 class="text-3xl font-bold text-gray-400">BIOW</h4>
+                <h4 class="text-3xl font-bold text-gray-400"><span class="font-light"></span></h4>
+                <h4 class="text-3xl font-bold text-gray-400"></h4>
+                <h4 class="text-3xl font-bold text-gray-400"></h4>
+            </div>
+
+            <div class="flex animate-scroll-fast gap-12 items-center w-max mb-12">
+                <h5 class="text-2xl font-bold text-gray-300">LIFE LENGHT LABORATORIES</h5>
+                <h5 class="text-2xl font-bold text-gray-300">IMMORTALIS</h5>
+                <h5 class="text-2xl font-bold text-gray-300">PROGEVITA</h5>
+                <h5 class="text-2xl font-bold text-gray-300">PROBIOTICOS KRYOGIN </h5>
+                <h5 class="text-2xl font-bold text-gray-300">PHYTOBIT</h5>
+                <h5 class="text-2xl font-bold text-gray-300"></h5>
+                <h5 class="text-2xl font-bold text-gray-300"></h5>
+                <h5 class="text-2xl font-bold text-gray-300"></h5>
+                <h5 class="text-2xl font-bold text-gray-300"></h5>
+                <h5 class="text-2xl font-bold text-gray-300"></h5>
+                <h5 class="text-2xl font-bold text-gray-300"></h5>
+                <h5 class="text-2xl font-bold text-gray-300"></h5>
+            </div>
+
+            <div class="flex animate-scroll-reverse gap-16 items-center w-max">
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Madrid Network</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">International Longevity Alliance</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Real Nacional Academia de Medicina de España</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Ilustre Oficial de Colegio de Médicos de Madrid</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Madrid Innovation</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Life Extension Foundation</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Lev Foundation</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Hevolution</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Life Bioscience</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Madrid Excelente</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Alfa Alianza Futurista</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">The Millennium Project</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">MacKinsey Health Institute</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Cuarto Factor Divulgación Científica</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Cenegenics</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Cluster Mad E-health</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Digital 4Health Worldwide</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Fundación Zeballos</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Sport Life</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Eventeas</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Muy Sibarita</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Fundación Bamberg</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">HealthGevity Nation</h5>
+                <h5 class="text-xl font-bold text-slate-400 uppercase tracking-widest">Humanity Plus</h5>
+
+
+            </div>
+            
+            <div class="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
+            <div class="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+        </div>
+    </section>
+
+    <section id="press" class="py-24 bg-navy-800 border-t border-white/5">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-header font-bold text-white mb-6">Press & <span class="text-teal-400">Media</span></h2>
+            <p class="text-slate-400 mb-12 max-w-2xl mx-auto">Access official press releases and accreditation forms.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-navy-900 p-8 border border-white/10 rounded-lg text-left">
+                    <h4 class="text-xl text-white font-bold mb-2">Media Accreditation</h4>
+                    <a href="#" class="text-gold-500 text-sm font-bold uppercase tracking-widest hover:text-white transition">Apply Now <i class="fas fa-chevron-right ml-1"></i></a>
+                </div>
+                <div class="bg-navy-900 p-8 border border-white/10 rounded-lg text-left">
+                    <h4 class="text-xl text-white font-bold mb-2">Brand Assets</h4>
+                    <a href="#" class="text-teal-400 text-sm font-bold uppercase tracking-widest hover:text-white transition">Download Kit <i class="fas fa-download ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 border-t border-white/10 pt-16 pb-12 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-8">
+                <h4 class="text-2xl font-header font-bold text-white tracking-widest mb-4">InternationalLongevitySummit<span class="text-gold-500">MADRID</span></h4>
+                <p class="text-slate-500 text-sm">© 2026 International Longevity Summit Madrid. All rights reserved.</p>
+            </div>
+
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8"></div>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 text-[10px] uppercase tracking-[0.2em] text-slate-600 font-medium">
+                <span class="hidden md:inline-block">Digital Architecture</span>
+                <div class="flex items-center gap-6">
+                    <a href="mailto:eduardo@longevitysummit.madrid" class="group flex items-center gap-2 hover:text-gold-500 transition-colors duration-300">
+                        <span>Eduardo Riveros</span>
+                        <i class="fas fa-arrow-right -rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0"></i>
+                    </a>
+                    <span class="text-white/10">|</span>
+                    <a href="mailto:pere@longevitysummit.madrid" class="group flex items-center gap-2 hover:text-teal-400 transition-colors duration-300">
+                        <span>Pere Fortea</span>
+                        <i class="fas fa-arrow-right -rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const modal = document.getElementById('register-modal');
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            }, 3000);
+        });
+        function closeModal() {
+            const modal = document.getElementById('register-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 3000);
+        }
+
+        function loadAllSpeakers() {
+            const grid = document.getElementById('speakers-grid');
+            const btnContainer = document.getElementById('load-more-container');
+            const newSpeakersCount = 40; 
+            let htmlContent = '';
+            
+            const roles = ["Genetics Lead", "AI Research", "Bio-Ethics", "Cryonics", "Policy Maker", "VC Investor", "Neuroscientist"];
+            const stockImages = [
+                "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop"
+            ];
+
+            for (let i = 0; i < newSpeakersCount; i++) {
+                const randomImg = stockImages[i % stockImages.length];
+                const randomRole = roles[i % roles.length];
+                htmlContent += `
+                <div class="speaker-card group relative animate-fade-in text-center">
+                    <img src="${randomImg}" class="speaker-img w-32 h-32 rounded-full mx-auto object-cover mb-4 bg-navy-800 border-4 border-transparent hover:border-teal-400">
+                    <h3 class="text-sm text-white font-bold">Dr. Expert Name ${i+1}</h3>
+                    <p class="text-xs text-teal-400">${randomRole}</p>
+                    <a href="#" target="_blank" class="inline-block mt-1 text-slate-400 hover:text-teal-400 transition-colors"><i class="fab fa-linkedin text-lg"></i></a>
+                </div>
+                `;
+            }
+            grid.insertAdjacentHTML('beforeend', htmlContent);
+            btnContainer.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
